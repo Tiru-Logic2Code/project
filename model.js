@@ -8,5 +8,11 @@ const userDB = mongoose.Schema({
     password:{
         type:String,
         require:true
+    },
+    CreatedAt:{
+        type:Date,
+        required:Date.now
     }
+
 })
+module.exports= mongoose.model("userdata",UserData)
