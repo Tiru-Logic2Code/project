@@ -15,4 +15,4 @@ const userDB = mongoose.Schema({
     }
 
 })
-module.exports= mongoose.model("userdata",UserData)
+module.exports= mongoose.model("userdata",userDB)
