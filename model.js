@@ -11,7 +11,7 @@ const userDB = mongoose.Schema({
     },
     CreatedAt:{
         type:Date,
-        required:Date.now
+        default:Date.now
     }
 
 })
