@@ -36,6 +36,24 @@ app.get ('/get_data',async(req,res)=>{
     
 })
 
+app.get('/get_data/:id', async(req,res)=>{
+    try{
+        const user = await userData.findById(req.params.id).select("username email")
+        if(!user){
+            return res.status(404).json({
+                message:"user not found"
+            })
+        }
+          return res.status(200).json(user)
 
-app.listen(3000, ()=> console.log("server is running....."))
+    }
+    catch(err){
+        console.log(err.message)
+    }
+});
+
+
+app.listen(3000, ()=>
+    { console.log("server is running.....");
+    });
 
