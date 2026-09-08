@@ -50,10 +50,54 @@ app.get('/get_data/:id', async(req,res)=>{
     catch(err){
         console.log(err.message)
     }
-});
+})
+    app.put('/update/:id',async (req,res)=>{
+    try{
+        const{username,email,password} = req.body;
+        const user = await userData.findByIdAndUpdate(
+            req.params.id,{
+                username,
+                email,
+                password
+            },
+            {
+                new: true
+            }
+        );
+        if(!user){
+            return res.status(404).json({
+                message:"User not found"
+            });
+        }
+        return res.status(200).json({
+            message:"user updated successfully",
+            userdata:user
+               
+            });
+    } catch (err){
+        console.log(err.message);
 
+    }
+    
+    })
+    app.delete('/delete/:id', async(req,res)=>{
+        try{
+            const user = await userData.findByIdAndDelete(req.params.id).select("username,email")
+            if(!user){
+                return res.status(404).json({
+                    message:"user not found"
+                })
+            }
+            return res.status(200).json(user)
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    })
+        
 
 app.listen(3000, ()=>
-    { console.log("server is running.....");
+    { 
+        console.log("server is running.....");
     });
 
